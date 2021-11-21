@@ -19,7 +19,7 @@ Route::middleware('auth')->prefix('me')->group(function () {
     Route::view('/', 'me.index')->name('me.index');
     Route::view('profile', 'me.profile')->name('me.profile');
 
-    Route::view('posts', 'me.posts.index')->name('me.posts.index');
+    Route::get('posts', \App\Http\Livewire\Me\Post\Index::class)->name('me.posts.index');
     Route::view('posts/create', 'me.posts.create')->name('me.posts.create');
     Route::view('posts/{post}', 'me.posts.show')->name('me.posts.show');
     Route::view('posts/{post}/edit', 'me.posts.edit')->name('me.posts.edit');
