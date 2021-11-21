@@ -16,12 +16,16 @@
 
     <!-- Scripts -->
     <script src="{{ mix('/assets/js/app.js') }}" defer></script>
+
+    <livewire:styles />
 </head>
 
 <body {{ $attributes->class(['font-sans antialiased min-h-screen bg-gray-100']) }}>
     <x-layouts.navbar />
 
     {{ $slot }}
+
+    <livewire:scripts />
 </body>
 
 </html>
