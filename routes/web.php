@@ -22,7 +22,7 @@ Route::middleware('auth')->prefix('me')->group(function () {
     Route::get('posts', \App\Http\Livewire\Me\Post\Index::class)->name('me.posts.index');
     Route::get('posts/create', \App\Http\Livewire\Me\Post\Create::class)->name('me.posts.create');
     Route::get('posts/{post}', \App\Http\Livewire\Me\Post\Show::class)->name('me.posts.show');
-    Route::view('posts/{post}/edit', 'me.posts.edit')->name('me.posts.edit');
+    Route::get('posts/{post}/edit', \App\Http\Livewire\Me\Post\Edit::class)->name('me.posts.edit');
 });
 
 require __DIR__ . '/auth.php';
