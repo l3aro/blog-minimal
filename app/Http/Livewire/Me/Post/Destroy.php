@@ -28,7 +28,7 @@ class Destroy extends Component
         $this->postIdToDelete = null;
 
         if ($this->redirect) {
-            return redirect($this->redirect);
+            return redirect()->route('me.posts.index');
         }
 
         $this->dispatchBrowserEvent('success', ['message' => 'Post deleted successfully']);
