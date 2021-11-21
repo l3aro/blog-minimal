@@ -1,4 +1,24 @@
 <div>
+    <x-slot name="action">
+        <div class="mt-5 flex xl:mt-0 xl:ml-4">
+            <span class="hidden sm:block ml-3">
+                <a href="{{ route('me.posts.create') }}"
+                    class="relative inline-flex items-center bg-gray-700 py-2 pl-3 pr-4 border border-transparent rounded-md shadow-sm text-white">
+                    <!-- Heroicon name: solid/add -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V8z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <p class="ml-2.5 text-sm font-medium">
+                        Write
+                    </p>
+                </a>
+            </span>
+        </div>
+    </x-slot>
+
     <div class="flex justify-between mb-3">
 
         <div class="max-w-lg w-full lg:max-w-xs">

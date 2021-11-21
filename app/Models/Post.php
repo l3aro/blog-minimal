@@ -4,13 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    protected $appends = ['image_url'];
 
     public function author()
     {
@@ -38,5 +42,35 @@ class Post extends Model
                 ->orWhere('title', 'like', "%{$search}%")
                 ->orWhere('description', 'like', "%{$search}%");
         });
+    }
+
+    public function updateImage(UploadedFile $file)
+    {
+        tap($this->image, function ($previous) use ($file) {
+            $this->forceFill([
+                'image' => $file->storePublicly('', ['disk' => $this->imageDisk()]),
+            ])->save();
+
+            if ($previous) {
+                Storage::disk($this->imageDisk())->delete($previous);
+            }
+        });
+    }
+
+    public function imageDisk()
+    {
+        return 'posts';
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->image
+            ? Storage::disk($this->imageDisk())->url($this->image)
+            : $this->defaultImageUrl();
+    }
+
+    public function defaultImageUrl()
+    {
+        return asset('/assets/images/blog-cover.webp');
     }
 }

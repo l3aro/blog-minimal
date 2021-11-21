@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Services\Contracts\PostService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class PostServiceEloquent implements PostService
 {
@@ -45,9 +46,7 @@ class PostServiceEloquent implements PostService
     {
         $model = $modelOrId instanceof Post ? $modelOrId : Post::find($modelOrId);
 
-        $model->update([
-            'image' => $image->store('posts', 'public'),
-        ]);
+        $model->updateImage($image);
 
         return $model;
     }

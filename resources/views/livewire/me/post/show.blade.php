@@ -75,11 +75,21 @@
         </div>
         <div class="flex border-b border-40 -mx-6 px-6">
             <div class="w-1/4 py-4">
+                <h4 class="font-normal text-80">{{ $post->published_at ? 'Published' : 'Publish' }} At</h4>
+            </div>
+            <div class="w-3/4 py-4 break-words">
+                <p class="text-90">
+                    {{ $post->publish_at ?? '__'}}
+                </p>
+            </div>
+        </div>
+        <div class="flex border-b border-40 -mx-6 px-6">
+            <div class="w-1/4 py-4">
                 <h4 class="font-normal text-80">Cover Image</h4>
             </div>
             <div class="w-3/4 py-4 break-words">
                 <div class="block h-post-card-image bg-cover bg-center bg-no-repeat w-full h-48 mb-5"
-                    style="background-image: url('{{ asset($post->image) }}')">
+                    style="background-image: url('{{ $post->image_url }}')">
                 </div>
             </div>
         </div>

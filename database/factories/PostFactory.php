@@ -24,7 +24,7 @@ class PostFactory extends Factory
             'description' => $this->faker->paragraphs(rand(5, 15), true),
             'content' => $this->faker->paragraph(rand(10, 20), true),
             'published_at' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
-            'image' => asset('/assets/images/blog-cover.webp'),
+            'image' => null,
             'status' => $this->faker->randomElement($postStatus->values()),
             'created_by' => User::inRandomOrder()->first()?->id ?? User::factory()->create()->id,
             'created_at' => $this->faker->dateTimeBetween('-2 month', '-1 month'),
