@@ -30,6 +30,7 @@ class Index extends Component
         return view('livewire.post.index', [
             'posts' => $this->queryBuilder($this->postService->query())
                 ->filter()
+                ->with('author:id,name,email')
                 ->paginate($this->perPage),
         ]);
     }

@@ -90,6 +90,9 @@
                             :direction="$sort['title'] ?? null">
                             Title
                         </x-data-table.heading>
+                        <x-data-table.heading>
+                            Author
+                        </x-data-table.heading>
                         <x-data-table.heading sortable wire:click="applySort('status')"
                             :direction="$sort['status'] ?? null">
                             Status
@@ -113,6 +116,10 @@
                                     {{ Str::limit($post->description, 40) }}
                                 </div>
                             </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">{{ $post->author->name }}</div>
+                                <div class="text-sm text-gray-500">{{ $post->author->email }}</div>
+                              </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 {{ $post->status }}
                             </td>
