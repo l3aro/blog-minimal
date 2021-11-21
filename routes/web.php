@@ -5,15 +5,17 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'blog.index');
 Route::view('blog/{slug}', 'blog.show')->name('blog.show');
 
-Route::view('posts', 'posts.index')->name('posts.index');
-Route::view('posts/{post}', 'posts.show')->name('posts.show');
+Route::middleware('auth')->group(function () {
+    Route::view('posts', 'posts.index')->name('posts.index');
+    Route::view('posts/{post}', 'posts.show')->name('posts.show');
 
-Route::view('users', 'users.index')->name('users.index');
-Route::view('users/create', 'users.create')->name('users.create');
-Route::view('users/{user}', 'users.show')->name('users.show');
-Route::view('users/{user}/edit', 'users.edit')->name('users.edit');
+    Route::view('users', 'users.index')->name('users.index');
+    Route::view('users/create', 'users.create')->name('users.create');
+    Route::view('users/{user}', 'users.show')->name('users.show');
+    Route::view('users/{user}/edit', 'users.edit')->name('users.edit');
+});
 
-Route::prefix('me')->group(function () {
+Route::middleware(['auth', 'can:access-admin-function'])->prefix('me')->group(function () {
     Route::view('/', 'me.index')->name('me.index');
     Route::view('profile', 'me.profile')->name('me.profile');
 
