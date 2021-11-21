@@ -61,8 +61,8 @@
                             </button>
                         </x-slot>
 
-                        <x-dropdown-link>
-                            Your Posts
+                        <x-dropdown-link :href="route('me.index')" >
+                            Your Profile
                         </x-dropdown-link>
 
                         <form action="{{ route('logout') }}" method="POST">
