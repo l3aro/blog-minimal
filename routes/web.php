@@ -7,7 +7,7 @@ Route::view('blog/{slug}', 'blog.show')->name('blog.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('posts', \App\Http\Livewire\Post\Index::class)->name('posts.index');
-    Route::view('posts/{post}', 'posts.show')->name('posts.show');
+    Route::get('posts/{post}', \App\Http\Livewire\Post\Show::class)->name('posts.show');
 
     Route::view('users', 'users.index')->name('users.index');
     Route::view('users/create', 'users.create')->name('users.create');
