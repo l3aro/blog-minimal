@@ -20,6 +20,10 @@ class Index extends Component
         ]],
     ];
 
+    protected $listeners = [
+        'post.deleted' => '$refresh',
+    ];
+
     public function mount()
     {
         $this->sort = ['id' => 'desc'];

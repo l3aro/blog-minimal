@@ -144,6 +144,7 @@
                                     </svg>
                                 </a>
                                 <button type="button"
+                                    wire:click.prevent="$emit('confirmingDeletion', {{ $post->id }})"
                                     class="transition inline-flex items-center px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs font-medium text-gray-700 hover:text-white bg-white hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500">
                                     <!-- Heroicon name: outline/trash -->
                                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -170,4 +171,6 @@
             </div>
         </div>
     </div>
+
+    <livewire:me.post.destroy />
 </div>

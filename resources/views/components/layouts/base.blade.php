@@ -25,6 +25,7 @@
 
     {{ $slot }}
 
+    <x-notifications />
     <livewire:scripts />
 </body>
 
