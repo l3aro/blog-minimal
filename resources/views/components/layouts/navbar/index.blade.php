@@ -56,7 +56,7 @@
                     <x-dropdown>
                         <x-slot name="trigger">
                             <button class="flex items-center text-sm font-medium">
-                                <img src="{{ asset('/assets/images/htmlife.jpg') }}" class="w-10 h-10 rounded-full"
+                                <img src="{{ auth()->user()->avatar_url }}" class="w-10 h-10 rounded-full"
                                     title="Baro">
                             </button>
                         </x-slot>
