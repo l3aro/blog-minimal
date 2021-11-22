@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Http\Livewire\Blog\Index::class)->name('blog.index');
-Route::view('blog/{slug}', 'blog.show')->name('blog.show');
+Route::get('blog/{slug}', \App\Http\Livewire\Blog\Show::class)->name('blog.show');
 
 Route::middleware(['auth', 'can:access-admin-function'])->group(function () {
     Route::get('posts', \App\Http\Livewire\Post\Index::class)->name('posts.index');

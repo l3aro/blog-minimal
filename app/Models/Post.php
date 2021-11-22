@@ -78,4 +78,20 @@ class Post extends Model
     {
         return asset('/assets/images/blog-cover.webp');
     }
+
+    public function nextPost(): ?self
+    {
+        return self::query()->published()
+            ->where('published_at', '>', $this->published_at)
+            ->orderBy('published_at', 'asc')
+            ->first();
+    }
+
+    public function previousPost(): ?self
+    {
+        return self::query()->published()
+            ->where('published_at', '<', $this->published_at)
+            ->orderBy('published_at', 'desc')
+            ->first();
+    }
 }

@@ -4,9 +4,9 @@
         @forelse ($posts as $post)
             <a class="no-underline block border border-lighter w-full mb-10 p-5 rounded shadow-md hover:shadow-2xl
             transition duration-200 ease-in-out transform hover:-translate-y-1"
-                href="#">
+                href="{{ route('blog.show', $post->slug) }}">
                 <div class="block h-post-card-image bg-cover bg-center bg-no-repeat w-full h-48 mb-5"
-                    style="background-image: url('{{ asset('/assets/images/blog-cover.webp') }}')">
+                    style="background-image: url('{{ $post->image_url }}')">
                 </div>
                 <div class="flex flex-col justify-between flex-1">
                     <div>

@@ -19,6 +19,6 @@ class Index extends Component
                 ->filter()
                 ->latest('published_at')
                 ->paginate($this->perPage),
-        ]);
+        ])->layout('layouts.blog');
     }
 }
