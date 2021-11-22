@@ -75,8 +75,8 @@
                             Created From
                         </label>
                         <div class="mt-1">
-                            <input type="date" wire:model="filter.created_at_from"
-                                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                            <x-flatpickr type="text" wire:model="filter.created_at_from"
+                                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
                         </div>
                     </div>
                     <div class="sm:col-span-6">
@@ -84,8 +84,8 @@
                             Created To
                         </label>
                         <div class="mt-1">
-                            <input type="date" wire:model="filter.created_at_to"
-                                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                            <x-flatpickr type="text" wire:model="filter.created_at_to"
+                                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
                         </div>
                     </div>
                     <div class="sm:col-span-6 text-right">
