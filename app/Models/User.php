@@ -37,6 +37,10 @@ class User extends Authenticatable
         'avatar_url',
     ];
 
+    protected $attributes = [
+        'is_admin' => false,
+    ];
+
     public function isAdmin()
     {
         return $this->is_admin;
