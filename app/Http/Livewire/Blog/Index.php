@@ -10,6 +10,10 @@ class Index extends Component
 {
     use HasDataTable;
 
+    protected $queryString = [
+        'filter' => ['except' => []],
+    ];
+
     public function render()
     {
         return view('livewire.blog.index', [
