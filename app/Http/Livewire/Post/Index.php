@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Post;
 
+use App\Enums\PostStatusEnum;
 use App\Http\Livewire\Traits\HasDataTable;
 use App\Services\Contracts\PostService;
 use Livewire\Component;
@@ -38,5 +39,10 @@ class Index extends Component
     public function getPostServiceProperty()
     {
         return app(PostService::class);
+    }
+
+    public function getPostStatusProperty()
+    {
+        return app(PostStatusEnum::class);
     }
 }

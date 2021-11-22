@@ -45,14 +45,15 @@
                             <select wire:model="filter.status"
                                 class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                 <option value="">&nbsp;</option>
-                                <option value="draft">Draft</option>
-                                <option value="published">Published</option>
+                                @foreach ($this->postStatus->labels() as $value => $label)
+                                    <option value="{{ $value }}">{{ $label }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="sm:col-span-6">
                         <label class="block text-sm font-medium text-gray-700">
-                            Published From
+                            Publish From
                         </label>
                         <div class="mt-1">
                             <input type="date" wire:model="filter.published_at_from"
@@ -61,7 +62,7 @@
                     </div>
                     <div class="sm:col-span-6">
                         <label class="block text-sm font-medium text-gray-700">
-                            Published To
+                            Publish To
                         </label>
                         <div class="mt-1">
                             <input type="date" wire:model="filter.published_at_to"
@@ -93,13 +94,12 @@
                         <x-data-table.heading>
                             Author
                         </x-data-table.heading>
-                        <x-data-table.heading sortable wire:click="applySort('status')"
-                            :direction="$sort['status'] ?? null">
+                        <x-data-table.heading>
                             Status
                         </x-data-table.heading>
                         <x-data-table.heading sortable wire:click="applySort('published_at')"
                             :direction="$sort['published_at'] ?? null">
-                            Published At
+                            Publish At
                         </x-data-table.heading>
                         <x-data-table.heading class="text-right">
                             #
@@ -119,9 +119,9 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-900">{{ $post->author->name }}</div>
                                 <div class="text-sm text-gray-500">{{ $post->author->email }}</div>
-                              </td>
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                {{ $post->status }}
+                                {{ $this->postStatus->label($post->status) }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {{ $post->published_at ?? '__' }}

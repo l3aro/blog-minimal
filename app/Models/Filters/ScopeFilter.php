@@ -4,11 +4,11 @@ namespace App\Models\Filters;
 
 use Closure;
 
-class SearchFilter extends Filter
+class ScopeFilter extends Filter
 {
-    public function __construct()
+    public function __construct($scopeName)
     {
-        $this->filterOn('search');
+        $this->filterOn($scopeName);
     }
 
     public function handle($query, Closure $next)
@@ -16,7 +16,7 @@ class SearchFilter extends Filter
         $filterName = 'filter.' . $this->field;
 
         if ($this->shouldFilter($filterName)) {
-            $query->search(request()->input($filterName));
+            $query->{$this->field}(request()->input($filterName));
         }
 
         return $next($query);

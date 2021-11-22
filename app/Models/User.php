@@ -86,7 +86,7 @@ class User extends Authenticatable
         return app(Pipeline::class)
             ->send($query)
             ->through([
-                new \App\Models\Filters\SearchFilter(),
+                new \App\Models\Filters\ScopeFilter('search'),
                 new \App\Models\Filters\BooleanFilter('is_admin'),
                 (new \App\Models\Filters\DateFromFilter),
                 (new \App\Models\Filters\DateToFilter),
