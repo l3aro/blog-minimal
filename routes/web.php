@@ -12,7 +12,7 @@ Route::middleware(['auth', 'can:access-admin-function'])->group(function () {
     Route::get('users', \App\Http\Livewire\User\Index::class)->name('users.index');
     Route::view('users/create', 'users.create')->name('users.create');
     Route::get('users/{user}', \App\Http\Livewire\User\Show::class)->name('users.show');
-    Route::view('users/{user}/edit', 'users.edit')->name('users.edit');
+    Route::get('users/{user}/edit', \App\Http\Livewire\User\Edit::class)->name('users.edit');
 });
 
 Route::middleware('auth')->prefix('me')->group(function () {
