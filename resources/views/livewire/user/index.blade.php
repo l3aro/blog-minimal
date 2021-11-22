@@ -130,7 +130,7 @@
                                 {{ $user->created_at ?? '__' }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="{{ route('posts.show', $user->id) }}"
+                                <a href="{{ route('users.show', $user->id) }}"
                                     class="transition inline-flex items-center px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs font-medium text-gray-700 hover:text-white bg-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500">
                                     <!-- Heroicon name: outline/eye -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
