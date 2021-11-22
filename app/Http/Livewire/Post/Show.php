@@ -3,15 +3,16 @@
 namespace App\Http\Livewire\Post;
 
 use App\Models\Post;
+use App\Services\Contracts\PostService;
 use Livewire\Component;
 
 class Show extends Component
 {
     public Post $post;
 
-    public function mount(Post $post)
+    public function mount(PostService $postService, $post)
     {
-        $this->post = $post;
+        $this->post = $postService->find($post);
     }
 
     public function render()

@@ -29,9 +29,9 @@ class Edit extends Component
         ];
     }
 
-    public function mount(Post $post)
+    public function mount(PostService $postService, $post)
     {
-        $this->post = $post;
+        $this->post = $postService->find($post);
     }
 
     public function updatedPostTitle()

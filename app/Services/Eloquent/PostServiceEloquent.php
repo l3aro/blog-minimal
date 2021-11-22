@@ -5,11 +5,14 @@ namespace App\Services\Eloquent;
 use App\Models\Post;
 use App\Services\Contracts\PostService;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class PostServiceEloquent implements PostService
 {
+    use AuthorizesRequests;
+
     public function query(): Builder
     {
         return Post::query();
@@ -23,7 +26,9 @@ class PostServiceEloquent implements PostService
 
     public function update(Post|int $modelOrId, array $data): Post
     {
-        $model = $modelOrId instanceof Post ? $modelOrId : Post::find($modelOrId);
+        $model = $this->find($modelOrId);
+
+        $this->authorize('update', $model);
 
         $model->update($data);
 
@@ -32,19 +37,25 @@ class PostServiceEloquent implements PostService
 
     public function delete(Post|int $modelOrId): void
     {
-        $model = $modelOrId instanceof Post ? $modelOrId : Post::find($modelOrId);
+        $model = $this->find($modelOrId);
+
+        $this->authorize('delete', $model);
 
         $model->delete();
     }
 
     public function find(Post|int $modelOrId): ?Post
     {
-        return $modelOrId instanceof Post ? $modelOrId : Post::find($modelOrId);
+        $model = $modelOrId instanceof Post ? $modelOrId : Post::find($modelOrId);
+        $this->authorize('view', $model);
+        return $model;
     }
 
     public function uploadImage(Post|int $modelOrId, UploadedFile $image): Post
     {
-        $model = $modelOrId instanceof Post ? $modelOrId : Post::find($modelOrId);
+        $model = $this->find($modelOrId);
+
+        $this->authorize('update', $model);
 
         $model->updateImage($image);
 
