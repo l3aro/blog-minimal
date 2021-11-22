@@ -17,7 +17,7 @@ Route::middleware(['auth', 'can:access-admin-function'])->group(function () {
 
 Route::middleware('auth')->prefix('me')->group(function () {
     Route::get('profile', \App\Http\Livewire\Me\Index::class)->name('me.index');
-    Route::view('profile/edit', 'me.profile')->name('me.profile');
+    Route::get('profile/edit', \App\Http\Livewire\Me\Edit::class)->name('me.edit');
 
     Route::get('posts', \App\Http\Livewire\Me\Post\Index::class)->name('me.posts.index');
     Route::get('posts/create', \App\Http\Livewire\Me\Post\Create::class)->name('me.posts.create');
