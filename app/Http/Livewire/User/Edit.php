@@ -21,6 +21,7 @@ class Edit extends Component
 
     protected $rules = [
         'user.name' => 'required|string|max:255',
+        'user.is_admin' => 'required|boolean',
         'password' => 'nullable|string|min:6|confirmed',
         'image' => 'nullable|image|max:2048|dimensions:ratio=1/1',
     ];
@@ -44,13 +45,15 @@ class Edit extends Component
         if ($this->image) {
             $this->userService->uploadAvatar($this->user->id, $this->image);
         }
+
+        return $this->user;
     }
 
     public function saveAndView()
     {
-        $this->save();
+        $user = $this->save();
 
-        return redirect()->route('me.index');
+        return redirect()->route('users.show', $user->id);
     }
 
     public function saveAndContinue()

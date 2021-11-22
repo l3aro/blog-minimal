@@ -44,6 +44,17 @@
         </div>
         <div class="flex border-b border-40 -mx-6 px-6">
             <div class="w-1/4 py-4">
+                <h4 class="font-normal text-80">Role</h4>
+            </div>
+            <div class="w-3/4 py-4 break-words">
+                <p class="text-90">
+                    {{ $role }}
+                </p>
+
+            </div>
+        </div>
+        <div class="flex border-b border-40 -mx-6 px-6">
+            <div class="w-1/4 py-4">
                 <h4 class="font-normal text-80">Total Post</h4>
             </div>
             <div class="w-3/4 py-4 break-words">

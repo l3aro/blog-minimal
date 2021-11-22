@@ -55,6 +55,41 @@
 
                 </div>
 
+                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                    <div>
+                        <div class="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700"
+                            id="label-notifications">
+                            Role
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <div class="max-w-lg">
+                            <p class="text-sm text-gray-500">Access level to the application.</p>
+                            <div class="mt-4 space-y-4">
+                                <div class="flex items-center">
+
+                                    <label for="level-admin" class="ml-3 block text-sm font-medium text-gray-700">
+                                        <input id="level-admin" name="user.is_admin" wire:model="user.is_admin"
+                                            type="radio"
+                                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                            value="1">
+                                        &nbsp;Admin
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+
+                                    <label for="level-user" class="ml-3 block text-sm font-medium text-gray-700">
+                                        <input id="level-user" name="user.is_admin" wire:model="user.is_admin"
+                                            type="radio"
+                                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                            value="0">
+                                        &nbsp;Member
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
