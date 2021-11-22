@@ -21,6 +21,11 @@ class Post extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function scopePublished($query)
+    {
+        return $query->where('published_at', '<=', now());
+    }
+
     public function scopeFilter($query)
     {
         return app(Pipeline::class)
