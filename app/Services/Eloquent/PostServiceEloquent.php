@@ -7,7 +7,6 @@ use App\Services\Contracts\PostService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 class PostServiceEloquent implements PostService
 {
@@ -58,6 +57,28 @@ class PostServiceEloquent implements PostService
         $this->authorize('update', $model);
 
         $model->updateImage($image);
+
+        return $model;
+    }
+
+    public function schedule(Post|int $modelOrId, \DateTimeInterface $date): Post
+    {
+        /** @var Post */
+        $model = $this->find($modelOrId);
+        $model->forceFill([
+            'published_at' => $date,
+        ])->saveQuietly();
+
+        return $model;
+    }
+
+    public function unpublish(Post|int $modelOrId): Post
+    {
+        /** @var Post */
+        $model = $this->find($modelOrId);
+        $model->forceFill([
+            'published_at' => null,
+        ])->saveQuietly();
 
         return $model;
     }

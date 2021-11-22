@@ -14,4 +14,6 @@ interface PostService
     function delete(Post|int $modelOrId): void;
     function find(Post|int $modelOrId): ?Post;
     function uploadImage(Post|int $modelOrId, UploadedFile $image): Post;
+    function schedule(Post|int $modelOrId, \DateTimeInterface $date): Post;
+    function unpublish(Post|int $modelOrId): Post;
 }

@@ -143,4 +143,22 @@ class Post extends Model
 
         return PostStatusEnum::PUBLISHED;
     }
+
+    public function getStatusTextAttribute()
+    {
+        if (!isset($this->published_at)) {
+            return 'On Drafting';
+        }
+
+        if ($this->published_at->isFuture()) {
+            return 'Post is scheduled for publishing on ' . $this->published_at->format('F j, Y H:i');
+        }
+
+        return 'Published on ' . $this->published_at->format('F j, Y H:i');
+    }
+
+    public function isDraft(): bool
+    {
+        return $this->status === PostStatusEnum::DRAFT;
+    }
 }
