@@ -14,6 +14,8 @@ class UserServiceEloquent implements UserService
 
     public function query(): Builder
     {
+        $this->authorize('viewAny', User::class);
+
         return User::query();
     }
 

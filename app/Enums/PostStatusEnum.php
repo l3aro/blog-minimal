@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-final class PostStatus extends Enum
+final class PostStatusEnum extends Enum
 {
     const DRAFT = 'draft';
     const PUBLISHED = 'published';

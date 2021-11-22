@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Me;
 
-use App\Enums\PostStatus;
+use App\Enums\PostStatusEnum;
 use Livewire\Component;
 
 class Index extends Component
@@ -14,8 +14,8 @@ class Index extends Component
         return view('livewire.me.index', [
             'user' => $user,
             'post_count' => $user->posts()->count(),
-            'post_draft_count' => $user->posts()->where('status', PostStatus::DRAFT)->count(),
-            'post_published_count' => $user->posts()->where('status', PostStatus::PUBLISHED)->count(),
+            'post_draft_count' => $user->posts()->where('status', PostStatusEnum::DRAFT)->count(),
+            'post_published_count' => $user->posts()->where('status', PostStatusEnum::PUBLISHED)->count(),
         ]);
     }
 }

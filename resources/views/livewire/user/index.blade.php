@@ -15,7 +15,7 @@
                 </div>
                 <input id="search" wire:model.debounce="filter.search" type="search"
                     class="block w-full bg-white py-2 pl-10 pr-3 border border-gray-300 rounded-md leading-5 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-purple-500 focus:placeholder-gray-500 sm:text-sm"
-                    placeholder="ID, Title, Description" type="search" name="search">
+                    placeholder="ID, Name, Email" type="search" name="search">
             </div>
         </div>
 
@@ -39,32 +39,33 @@
                 <div class="grid grid-cols-1 gap-y-4 gap-x-4 sm:grid-cols-6 py-4">
                     <div class="sm:col-span-6">
                         <label class="block text-sm font-medium text-gray-700">
-                            Status
+                            Role
                         </label>
                         <div class="mt-1">
-                            <select wire:model="filter.status"
+                            <select wire:model="filter.is_admin"
                                 class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                 <option value="">&nbsp;</option>
-                                <option value="draft">Draft</option>
-                                <option value="published">Published</option>
+                                @foreach ($this->role->labels() as $value => $label)
+                                    <option value="{{ $value }}">{{ $label }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="sm:col-span-6">
                         <label class="block text-sm font-medium text-gray-700">
-                            Published From
+                            Created From
                         </label>
                         <div class="mt-1">
-                            <input type="date" wire:model="filter.published_at_from"
+                            <input type="date" wire:model="filter.created_at_from"
                                 class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                         </div>
                     </div>
                     <div class="sm:col-span-6">
                         <label class="block text-sm font-medium text-gray-700">
-                            Published To
+                            Created To
                         </label>
                         <div class="mt-1">
-                            <input type="date" wire:model="filter.published_at_to"
+                            <input type="date" wire:model="filter.created_at_to"
                                 class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                         </div>
                     </div>
@@ -86,48 +87,50 @@
                         <x-data-table.heading sortable wire:click="applySort('id')" :direction="$sort['id'] ?? null">
                             ID
                         </x-data-table.heading>
-                        <x-data-table.heading sortable wire:click="applySort('title')"
-                            :direction="$sort['title'] ?? null">
-                            Title
+                        <x-data-table.heading sortable wire:click="applySort('name')"
+                            :direction="$sort['name'] ?? null">
+                            Name
                         </x-data-table.heading>
-                        <x-data-table.heading>
-                            Author
+                        <x-data-table.heading sortable wire:click="applySort('is_admin')"
+                            :direction="$sort['is_admin'] ?? null">
+                            Role
                         </x-data-table.heading>
-                        <x-data-table.heading sortable wire:click="applySort('status')"
-                            :direction="$sort['status'] ?? null">
-                            Status
-                        </x-data-table.heading>
-                        <x-data-table.heading sortable wire:click="applySort('published_at')"
-                            :direction="$sort['published_at'] ?? null">
-                            Published At
+                        <x-data-table.heading sortable wire:click="applySort('created_at')"
+                            :direction="$sort['created_at'] ?? null">
+                            Created At
                         </x-data-table.heading>
                         <x-data-table.heading class="text-right">
                             #
                         </x-data-table.heading>
                     </x-slot>
-                    @forelse ($posts as $post)
-                        <tr wire:key="{{ $post->id }}">
+                    @forelse ($users as $user)
+                        <tr wire:key="{{ $user->id }}">
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $post->id }}
+                                {{ $user->id }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $post->title }}</div>
-                                <div class="text-sm text-gray-500">
-                                    {{ Str::limit($post->description, 40) }}
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10">
+                                        <img class="h-10 w-10 rounded-full" src="{{ $user->avatar_url }}" alt="">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">
+                                            {{ $user->name }}
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            {{ $user->email }}
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $post->author->name }}</div>
-                                <div class="text-sm text-gray-500">{{ $post->author->email }}</div>
-                              </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                {{ $post->status }}
+                                {{ $this->role->label($user->is_admin) }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ $post->published_at ?? '__' }}
+                                {{ $user->created_at ?? '__' }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <a href="{{ route('posts.show', $post->id) }}"
+                                <a href="{{ route('posts.show', $user->id) }}"
                                     class="transition inline-flex items-center px-3 py-2 border border-gray-300 rounded-md shadow-sm text-xs font-medium text-gray-700 hover:text-white bg-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500">
                                     <!-- Heroicon name: outline/eye -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
@@ -142,14 +145,14 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center p-6">
-                                <div class="text-gray-500">No posts found.</div>
+                            <td colspan="5" class="text-center p-6">
+                                <div class="text-gray-500">No users found.</div>
                             </td>
                         </tr>
                     @endforelse
 
                     <x-slot name="pagination">
-                        {{ $posts->onEachSide(1)->links() }}
+                        {{ $users->onEachSide(1)->links() }}
                     </x-slot>
                 </x-data-table>
             </div>

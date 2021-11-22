@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\PostStatus;
+use App\Enums\PostStatusEnum;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -16,8 +16,8 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        /** @var PostStatus */
-        $postStatus = app(PostStatus::class);
+        /** @var PostStatusEnum */
+        $postStatus = app(PostStatusEnum::class);
         return [
             'title' => $title = $this->faker->sentence(rand(3, 5)),
             'slug' => Str::slug($title) . '-' . rand(1, 100),

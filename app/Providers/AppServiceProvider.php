@@ -13,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(\App\Enums\PostStatus::class);
+        $this->app->singleton(\App\Enums\PostStatusEnum::class);
+        $this->app->singleton(\App\Enums\UserRoleEnum::class);
 
         $this->app->bind(\App\Services\Contracts\PostService::class, \App\Services\Eloquent\PostServiceEloquent::class);
         $this->app->bind(\App\Services\Contracts\UserService::class, \App\Services\Eloquent\UserServiceEloquent::class);

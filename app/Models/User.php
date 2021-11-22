@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -74,5 +75,28 @@ class User extends Authenticatable
     protected function defaultAvatar()
     {
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';
+    }
+
+    public function scopeFilter($query)
+    {
+        return app(Pipeline::class)
+            ->send($query)
+            ->through([
+                new \App\Models\Filters\SearchFilter(),
+                new \App\Models\Filters\BooleanFilter('is_admin'),
+                (new \App\Models\Filters\DateFromFilter),
+                (new \App\Models\Filters\DateToFilter),
+                new \App\Models\Filters\Sort(),
+            ])
+            ->thenReturn();
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->where(function ($query) use ($search) {
+            $query->where('id', $search)
+                ->orWhere('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
+        });
     }
 }
