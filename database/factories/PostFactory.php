@@ -25,7 +25,6 @@ class PostFactory extends Factory
             'content' => $this->faker->paragraph(rand(10, 20), true),
             'published_at' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
             'image' => null,
-            'status' => $this->faker->randomElement($postStatus->values()),
             'created_by' => User::inRandomOrder()->first()?->id ?? User::factory()->create()->id,
             'created_at' => $this->faker->dateTimeBetween('-2 month', '-1 month'),
             'updated_at' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
